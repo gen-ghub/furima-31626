@@ -1,24 +1,68 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column           | Type    | Options                        |
+| ---------------- | ------- | ------------------------------ |
+| nickname         | string  | null: false                    |
+| email            | string  | null: false, unique:true       |
+| password         | string  | null: false                    |
+| first_name       | string  | null: false                    |
+| second_name      | string  | null: false                    |
+| kana_first_name  | string  | null: false                    |
+| kana_second_name | string  | null: false                    |
+| birthday_year    | integer | null: false                    |
+| birthday_month   | integer | null: false                    |
+| birthday_day     | integer | null: false                    |
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :price_records
 
-* System dependencies
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column          | Type       | Options                       |
+| --------------- | ---------- | ----------------------------- |
+| item_image      | string     | null: false                   |
+| item_name       | string     | null: false                   |
+| description     | string     | null: false                   |
+| delivery_id     | integer    | null: false                   |
+| day_id          | integer    | null: false                   |
+| price           | integer    | null: false                   |
+| area_id         | integer    | null: false                   |
+| status_id       | integer    | null: false                   |
+| tag_id          | integer    | null: false                   |
+| user_id         | references | null: false, foreign_key: true|
 
-* Database initialization
+### Association
+- belongs_to :user
+- has_one :price_records
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## price_records テーブル
 
-* Deployment instructions
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| purchase_date | datetime   | null: false,                   |
+| user_id       | references | null: false, foreign_key: true |
+| item_id       | references | null: false, foreign_key: true |
 
-* ...
+### Association
+- belongs_to :users
+- belongs_to :items
+- has_one :home_addresses
+
+
+## home_addresses テーブル
+
+| Column          | Type        | Options                       |
+| --------------- | ----------- | ----------------------------- |
+| postal_code     | integer(8)  | null: false                   |
+| town            | string      | null: false                   |
+| town_number     | string      | null: false                   |
+| phone_number    | integer(11) | null: false                   |
+| price_record_id | integer     | null: false,foreign_key: true |
+
+### Association
+- belongs_to :price_records

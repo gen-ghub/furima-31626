@@ -58,8 +58,8 @@
 | postal_code   | string(8)  | null: false                   |
 | area_id       | integer    | null: false                   |
 | town          | string     | null: false                   |
-| town_number   | string     |                               |
-| building_name | string     | null: false                   |
+| town_number   | string     | null: false                   |
+| building_name | string     |                               |
 | phone_number  | string(11) | null: false                   |
 | price_record  | reference  | null: false,foreign_key: true |
 

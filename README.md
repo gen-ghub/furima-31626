@@ -35,7 +35,7 @@
 
 ### Association
 - belongs_to :user
-- has_one :price_records
+- has_one :price_record
 
 
 ## price_records テーブル
@@ -56,6 +56,7 @@
 | Column        | Type       | Options                       |
 | ------------- | ---------- | ----------------------------- |
 | postal_code   | string(8)  | null: false                   |
+| area_id       | integer    | null: false                   |
 | town          | string     | null: false                   |
 | town_number   | string     | null: false                   |
 | building_name | string     | null: false                   |

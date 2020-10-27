@@ -15,8 +15,8 @@
 
 
 ### Association
-- has_many :items
-- has_many :price_records
+- has_many :item
+- has_many :price_record
 
 
 ## items テーブル
@@ -46,9 +46,9 @@
 | item          | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :items
-- has_one :home_addresses
+- belongs_to :user
+- belongs_to :item
+- has_one :home_address
 
 
 ## home_addresses テーブル
@@ -63,4 +63,4 @@
 | price_record  | reference  | null: false,foreign_key: true |
 
 ### Association
-- belongs_to :price_records
+- belongs_to :price_record

@@ -15,15 +15,15 @@
 
 
 ### Association
-- has_many :item
-- has_many :price_record
+- has_many :items
+- has_many :price_records
 
 
 ## items テーブル
 
 | Column          | Type       | Options                       |
 | --------------- | ---------- | ----------------------------- |
-| item_name       | string     | null: false                   |
+| name            | string     | null: false                   |
 | description     | text       | null: false                   |
 | delivery_id     | integer    | null: false                   |
 | day_id          | integer    | null: false                   |
@@ -58,7 +58,7 @@
 | postal_code   | string(8)  | null: false                   |
 | area_id       | integer    | null: false                   |
 | town          | string     | null: false                   |
-| town_number   | string     | null: false                   |
+| town_number   | string     |                               |
 | building_name | string     | null: false                   |
 | phone_number  | string(11) | null: false                   |
 | price_record  | reference  | null: false,foreign_key: true |

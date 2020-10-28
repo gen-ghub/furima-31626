@@ -1,19 +1,27 @@
 class User < ApplicationRecord
   validates :nickname, presence: true
+  validates :first_name, presence: true
+  validates :second_name, presence: true
+  validates :kana_first_name, presence: true
+  validates :kana_second_name, presence: true
   validates :birthday, presence: true
 
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください', unless: :pas_box?
+
+  def pas_box?
+    password == ""
+  end
 
 
-  validates :kana_first_name, presence: true,format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' }, unless: :first_box?
+  validates :first_name, presence: true,format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' }, unless: :first_box?
 
   def first_box?
     first_name == ""
   end
 
-  validates :kana_second_name, presence: true,format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' }, unless: :second_box?
+  validates :second_name, presence: true,format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' }, unless: :second_box?
 
   def second_box?
     second_name == ""

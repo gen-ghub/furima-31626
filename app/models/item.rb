@@ -21,11 +21,20 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates :delivery_id, numericality: { other_than: 1 }
-  validates :day_id, numericality: { other_than: 1 }
-  validates :area_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
-  validates :tag_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+  validates :delivery_id
+  validates :day_id
+  validates :area_id
+  validates :status_id
+  validates :tag_id
+  end
+
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }, unless: :price_box?
+
+  def price_box?
+    price == ''
+  end
+
 
 
 end

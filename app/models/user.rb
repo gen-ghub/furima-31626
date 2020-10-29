@@ -39,6 +39,8 @@ class User < ApplicationRecord
     kana_second_name == ''
   end
 
+  has_many :items
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end

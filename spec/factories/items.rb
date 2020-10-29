@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
     name        { Faker::Name.initials(number: 4) }
-    description { "テストコード用の説明" }
+    description { 'テストコード用の説明' }
     delivery_id { 2 }
     day_id      { 2 }
     price       { 1000 }

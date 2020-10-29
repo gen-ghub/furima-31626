@@ -22,13 +22,12 @@ class Item < ApplicationRecord
   end
 
   with_options numericality: { other_than: 1 } do
-  validates :delivery_id, numericality: { message: "must be other than --" }
-  validates :day_id, numericality: { message: "must be other than --" }
-  validates :area_id, numericality: { message: "must be other than --" }
-  validates :status_id, numericality: { message: "must be other than --" }
-  validates :tag_id, numericality: { message: "must be other than --" }
+    validates :delivery_id, numericality: { message: 'must be other than --' }
+    validates :day_id, numericality: { message: 'must be other than --' }
+    validates :area_id, numericality: { message: 'must be other than --' }
+    validates :status_id, numericality: { message: 'must be other than --' }
+    validates :tag_id, numericality: { message: 'must be other than --' }
   end
 
-  validates :price, numericality: { greater_than_or_equal_to: 300,      less_than_or_equal_to: 9999999, }
-
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 end

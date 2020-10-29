@@ -22,19 +22,13 @@ class Item < ApplicationRecord
   end
 
   with_options numericality: { other_than: 1 } do
-  validates :delivery_id
-  validates :day_id
-  validates :area_id
-  validates :status_id
-  validates :tag_id
+  validates :delivery_id, numericality: { message: "must be other than --" }
+  validates :day_id, numericality: { message: "must be other than --" }
+  validates :area_id, numericality: { message: "must be other than --" }
+  validates :status_id, numericality: { message: "must be other than --" }
+  validates :tag_id, numericality: { message: "must be other than --" }
   end
 
-  validates :price, presence: true, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' }, unless: :price_box?
-
-  def price_box?
-    price == ''
-  end
-
-
+  validates :price, numericality: { greater_than_or_equal_to: 300,      less_than_or_equal_to: 9999999, }
 
 end

@@ -9,10 +9,6 @@ describe Item do
       it 'name,description,delivery_id,day_id,price,area_id,status_id,tag_id,が存在すれば登録できる' do
         expect(@item).to be_valid
       end
-      it '価格の範囲が、¥300~¥9,999,999の間であれば登録できる' do
-        @item.price = 400
-        expect(@item).to be_valid
-      end
     end
 
     context '出品投稿がうまくいかないとき' do
@@ -31,25 +27,50 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
+      it 'tag_idが空では登録できない' do
+        @item.tag_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Tag can't be blank")
+      end
       it 'tag_idが--では登録できない' do
         @item.tag_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Tag must be other than --')
+      end
+      it 'status_idが空では登録できない' do
+        @item.status_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status can't be blank")
       end
       it 'status_idが--では登録できない' do
         @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Status must be other than --')
       end
+      it 'delivery_idが空では登録できない' do
+        @item.delivery_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery can't be blank")
+      end
       it 'delivery_idが--では登録できない' do
         @item.delivery_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery must be other than --')
       end
+      it 'area_idが空では登録できない' do
+        @item.area_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area can't be blank")
+      end
       it 'area_idが--では登録できない' do
         @item.area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Area must be other than --')
+      end
+      it 'day_idが空では登録できない' do
+        @item.day_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day can't be blank")
       end
       it 'day_idが--では登録できない' do
         @item.day_id = 1

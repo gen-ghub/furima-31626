@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
     @items = Item.includes(:user).order('created_at DESC')
-    @delivery = ['--', '着払い（購入者負担）', '送料込み（出品者負担）']
+    @delivery = Delivery.all
   end
 
   def new

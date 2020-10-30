@@ -14,7 +14,7 @@
         <span>Sold Out!!</span>
       </div> %>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
-      
+
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -106,7 +106,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class='another-item'><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class='another-item'><%= @item.tag.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>

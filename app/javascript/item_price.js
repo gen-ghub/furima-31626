@@ -11,5 +11,12 @@ window.addEventListener('load', () => {
     profitDom.innerHTML = Math.floor(inputValue - taxInputValue);
   })
 
+    const inputValue = priceInput.value;
+    const addTaxDom = document.getElementById("add-tax-price");
+    addTaxDom.innerHTML = Math.floor(inputValue / 10);
+    const taxInputValue = Math.floor(inputValue / 10);
+    const profitDom = document.getElementById("profit");
+    profitDom.innerHTML = Math.floor(inputValue - taxInputValue);
+
 });
 

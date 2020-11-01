@@ -2,14 +2,17 @@ class ShoppingsController < ApplicationController
 
   def index
     @shopping = Shopping.new
+    @item = Item.find(params[:item_id])
   end
 
   def create
     @shopping =Shopping.new(shopping_params)
     if @shopping.valid?
+      pay_item
       @shopping.save
       redirect_to root_path
     else
+      @item = Item.find(params[:item_id])
       render action: :index
     end
   end
@@ -18,6 +21,18 @@ class ShoppingsController < ApplicationController
   private
 
   def shopping_params
-    params.permit(:user_id, :item_id, :postal_code, :area_id, :town, :town_number, :building_name, :phone_number).merge(user_id: current_user.id)
+    params.require(:shopping).permit(:postal_code, :area_id, :town, :town_number, :building_name, :phone_number).merge(user_id: current_user.id, token: params[:token],item_id: params[:item_id] )
   end
+
+  def pay_item
+    @item = Item.find(params[:item_id])
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+        amount: @item.price,
+        card: shopping_params[:token],
+        currency: 'jpy'
+      )
+  end
+
+
 end

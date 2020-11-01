@@ -1,8 +1,12 @@
 class ShoppingsController < ApplicationController
-
+  before_action :authenticate_user!, only: [:index, :create]
+  
   def index
     @shopping = Shopping.new
-    @item = Item.find(params[:item_id])
+      @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
   def create
@@ -19,6 +23,7 @@ class ShoppingsController < ApplicationController
 
 
   private
+
 
   def shopping_params
     params.require(:shopping).permit(:postal_code, :area_id, :town, :town_number, :building_name, :phone_number).merge(user_id: current_user.id, token: params[:token],item_id: params[:item_id] )

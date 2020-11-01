@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   has_one :price_recod
 
   with_options presence: true do
-    validates :nameS
+    validates :name
     validates :description
     validates :delivery_id
     validates :day_id

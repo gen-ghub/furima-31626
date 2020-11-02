@@ -24,7 +24,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless @item.user.id == current_user.id
+    unless @item.user.id == current_user.id
+    redirect_to root_path
+    end
+    if @item.price_record
+      redirect_to root_path
+    end
   end
 
   def destroy

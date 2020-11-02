@@ -136,9 +136,11 @@
 
             <%# 購入機能実装後下記表示 %>
             <%# 商品が売れていればsold outを表示しましょう %>
-            <%# <div class='sold-out'>
+            <% if item.price_record %>
+            <div class='sold-out'>
               <span>Sold Out!!</span>
-            </div> %>
+            </div>
+            <% end %>
             <%# //商品が売れていればsold outを表示しましょう %>
 
           </div>

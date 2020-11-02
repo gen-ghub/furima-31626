@@ -1,6 +1,6 @@
 class ShoppingsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-
+  before_action :sold_aut, only:[:index, :create]
   def index
     @shopping = Shopping.new
     @item = Item.find(params[:item_id])
@@ -20,6 +20,13 @@ class ShoppingsController < ApplicationController
   end
 
   private
+  def sold_aut
+    @record = PriceRecord.new
+    @item = Item.find(params[:item_id])
+    if @item.id
+      redirect_to root_path
+    end
+  end
 
   def shopping_params
     params.require(:shopping).permit(:postal_code, :area_id, :town, :town_number, :building_name, :phone_number).merge(user_id: current_user.id, token: params[:token], item_id: params[:item_id])

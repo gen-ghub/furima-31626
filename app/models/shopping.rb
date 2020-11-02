@@ -8,9 +8,10 @@ class Shopping
     validates :town_number
     validates :token
     validates :phone_number
+    validates :area_id
   end
 
-  validates :area_id, numericality: { other_than: 0, message: "can't be blank" }
+  validates :area_id, numericality: { other_than: 1, message: "must be other than --" }
 
   validates :phone_number, format: { with: /\A[0-9]{11}\z/, message: 'is enter within 11 digits' }, unless: :phone_box?
 

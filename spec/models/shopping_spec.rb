@@ -31,6 +31,11 @@ RSpec.describe Shopping, type: :model do
         @shopping.valid?
         expect(@shopping.errors.full_messages).to include("Area can't be blank")
       end
+      it '都道府県が--では登録できない' do
+        @shopping.area_id = 1
+        @shopping.valid?
+        expect(@shopping.errors.full_messages).to include("Area must be other than --")
+      end
       it '市区町村が空だと保存できないこと' do
         @shopping.town = nil
         @shopping.valid?

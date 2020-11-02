@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @record = PriceRecord.new
   end
 
   def edit

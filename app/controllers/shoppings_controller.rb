@@ -1,10 +1,12 @@
 class ShoppingsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :id_item, only:[:index, :create]
   before_action :sold_aut, only:[:index, :create]
   def index
     @shopping = Shopping.new
-    @item = Item.find(params[:item_id])
-    redirect_to root_path if current_user.id == @item.user_id
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
   def create
@@ -14,16 +16,18 @@ class ShoppingsController < ApplicationController
       @shopping.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
+      id_item
       render action: :index
     end
   end
 
   private
-  def sold_aut
-    @record = PriceRecord.new
+  def id_item
     @item = Item.find(params[:item_id])
-    if @item.id
+  end
+
+  def sold_aut
+    if @item.price_record
       redirect_to root_path
     end
   end
@@ -33,7 +37,7 @@ class ShoppingsController < ApplicationController
   end
 
   def pay_item
-    @item = Item.find(params[:item_id])
+    id_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
